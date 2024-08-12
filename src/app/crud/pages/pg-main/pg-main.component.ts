@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CModalComponent } from '../../components/c-modal/c-modal.component';
 import { Estados } from '../../../services/estados';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'pg-main',
@@ -19,6 +20,7 @@ import { Estados } from '../../../services/estados';
 })
 export class PgMainComponent {
   @ViewChild(CModalComponent) modal: any;
+  isloading: boolean = false;
   swBanco = inject(SwBancoService);
   router = inject(Router);
   stateProduct = inject(Estados);
@@ -29,12 +31,16 @@ export class PgMainComponent {
   viewData: number = 5;
 
   constructor() {
-    this.swBanco.getProductos().subscribe((res: IResponse<ICreditCard>) => {
-      this.products = res.data;
-      this.cpyProducts = res.data;
-      this.selectView();
-      console.log('this.products: ', this.products);
-    });
+    this.swBanco
+      .getProductos()
+      .pipe(delay(1500))
+      .subscribe((res: IResponse<ICreditCard>) => {
+        this.isloading = true;
+        this.products = res.data;
+        this.cpyProducts = res.data;
+        this.selectView();
+        console.log('this.products: ', this.products);
+      });
   }
 
   ngOnInit() {}
