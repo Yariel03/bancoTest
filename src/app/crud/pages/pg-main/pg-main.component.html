@@ -1,73 +1,63 @@
 <div class="container">
-
-<div class="zone">
-       
+  <div class="zone">
     <div class="toolBarTable">
-        <div><input class="input" placeholder="Search..." type="text"></div>
-        <div><button class="button bg-primary text-color" type="button">Agregar</button></div>
+      <div><input class="input" placeholder="Search..." type="text" /></div>
+      <div>
+        <button
+          class="button bg-primary text-color"
+          type="button"
+          (click)="press()"
+        >
+          Agregar
+        </button>
+      </div>
     </div>
-<div class="card">
-
-    <div class="container-table">
+    <div class="card">
+      <div class="container-table">
         <table class="table">
-            
-            <tr class="thead" >
-                <th class="th_header "><span class="text-color">Logo</span></th>
-                <th class="th_header"><span class="text-color">Nombre del producto</span> </th>
-                <th class="th_header"><span class="text-color">Descripcion</span></th>
-                <th class="th_header"><span class="text-color">Fecha de liberacion</span> </th>
-                <th class="th_header"><span class="text-color">fecha de reestructuracion</span> </th>
-                <th class="th_header"><span class="text-color">00000</span></th>
-            </tr>
-            
-            <tr>
-                <td><c-avatar [avatar]="'JG'"/></td>
-                <td>visa</td>
-                <td>tarjeta de credito</td>
-                <td>27/08/2024</td>
-                <td>30/08/2024</td>
-                <td>
-                        <button class="button " type="button">...</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>jdfgsdfgsdfgdg Quasi hic reiciendis, doloribus quae nihil aperiam labore amet ipsa doloremque vero, fugit vitae natus fugiat maxime rerum, officia corporis? Voluptates, quos.</td>
-                    <td>visa</td>
-                    <td>tarjeta de credito</td>
-                    <td>27/08/2024</td>
-                    <td>30/08/2024</td>
-                    <td>
-                        <button class="button " type="button">...</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>jdfgsdfgsdfgdg Quasi hic reiciendis, doloribus quae nihil aperiam labore amet ipsa doloremque vero, fugit vitae natus fugiat maxime rerum, officia corporis? Voluptates, quos.</td>
-                    <td>visa</td>
-                    <td>tarjeta de credito</td>
-                    <td>27/08/2024</td>
-                    <td>30/08/2024</td>
-                    <td>
-                        <button class="button " type="button">...</button>
-                    </td>
-                </tr>
-                
-            </table>
-            
-            
-            
+          <tr class="thead">
+            <th class="th_header"><span class="text-color">Logo</span></th>
+            <th class="th_header">
+              <span class="text-color">Nombre del producto</span>
+            </th>
+            <th class="th_header">
+              <span class="text-color">Descripcion</span>
+            </th>
+            <th class="th_header">
+              <span class="text-color">Fecha de liberacion</span>
+            </th>
+            <th class="th_header">
+              <span class="text-color">fecha de reestructuracion</span>
+            </th>
+            <th class="th_header"><span class="text-color">00000</span></th>
+          </tr>
+          @for (product of this.products; track product.id) {
+          <tr>
+            <td><c-avatar [avatar]="product.logo" /></td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.date_release }}</td>
+            <td>{{ product.date_revision }}</td>
+            <td>
+              <button class="button" type="button">...</button>
+            </td>
+          </tr>
+          }
+        </table>
+      </div>
+
+      <div class="toolBarTable">
+        <div class="footerTable"><h4 class="text-color">5 Resultado</h4></div>
+        <div>
+          <select>
+            <option>10</option>
+            <option>20</option>
+            <option>30</option>
+            <option>40</option>
+            <option>50</option>
+          </select>
         </div>
-        
-        
-        <div class="toolBarTable">
-            
-            <div class="footerTable"><h4 class="text-color">5 Resultado</h4></div>
-            <div><select>
-                <option>10</option>
-                <option>20</option>
-                <option>30</option>
-                <option>40</option>
-                <option>50</option>
-            </select></div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
