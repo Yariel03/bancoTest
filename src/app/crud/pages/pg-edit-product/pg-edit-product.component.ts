@@ -1,5 +1,4 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, Input, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -8,17 +7,28 @@ import {
   Validators,
 } from '@angular/forms';
 import { SwBancoService } from '../../../services/sw-banco.service';
-import { Utils } from '../../../utils/utils';
 import { Router } from '@angular/router';
+import { Utils } from '../../../utils/utils';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'pg-new-produt',
+  selector: 'pg-edit-product',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule, CommonModule],
-  templateUrl: './pg-new-produt.component.html',
-  styleUrl: './pg-new-produt.component.css',
+  templateUrl: './pg-edit-product.component.html',
+  styleUrl: './pg-edit-product.component.css',
 })
-export class PgNewProdutComponent {
+export class PgEditProductComponent {
+  @Input() id: any;
+
+  ngOnInit() {
+    console.log('this.id: ', this.id);
+    this.swProducts.getProduct(this.id).subscribe((res) => {
+      console.log('res: ', res);
+      this.frmProduct.patchValue(res);
+    });
+  }
+
   frmProduct: FormGroup = new FormGroup({});
   fb = inject(FormBuilder);
   isExist = signal(false);
@@ -76,7 +86,7 @@ export class PgNewProdutComponent {
       console.log('Invalid form');
       return;
     }
-    this.swProducts.saveProduct(this.frmProduct.value).subscribe((res) => {
+    this.swProducts.updateProduct(this.frmProduct.value).subscribe((res) => {
       console.log('Save', res);
       this.router.navigate(['/main']);
     });
