@@ -1,3 +1,5 @@
+import { ICreditCard } from '../interfaces/IProducts.interface';
+
 export class Utils {
   static CapitalLeters(nameLogo: string): string {
     return nameLogo
@@ -9,7 +11,7 @@ export class Utils {
       .join('');
   }
 
-  static formatDateToYYYYMMDD(date: any): string {
+  static formatDateToYYYYMMDD(date: Date): string {
     if (!(date instanceof Date)) {
       throw new Error('El parámetro debe ser una instancia de Date.');
     }
@@ -19,5 +21,19 @@ export class Utils {
     const day = String(date.getDate()).padStart(2, '0');
 
     return `${year}-${month}-${day}`;
+  }
+
+  static filterProducts(
+    products: ICreditCard[],
+    dataFilter: string
+  ): ICreditCard[] {
+    return products.filter(
+      (product) =>
+        product.name.toLowerCase().includes(dataFilter.toLowerCase()) ||
+        product.description.toLowerCase().includes(dataFilter.toLowerCase()) ||
+        product.id.toString().includes(dataFilter) ||
+        product.date_revision.toString().includes(dataFilter) ||
+        product.date_release.toString().includes(dataFilter)
+    );
   }
 }
