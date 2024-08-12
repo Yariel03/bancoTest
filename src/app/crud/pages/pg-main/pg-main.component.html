@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="zone">
+    <div class="toolBarTable">
+      <div>
+        <input
+          class="input"
+          placeholder="Search..."
+          type="text"
+          (keyup)="search()"
+          [(ngModel)]="dataFilter"
+        />
+      </div>
+      <div>
+        <button
+          class="button bg-primary text-color"
+          type="button"
+          (click)="newProduct()"
+        >
+          Agregar
+        </button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="container-table">
+        <table class="table">
+          <thead class="thead">
+            <tr>
+              <th class="th_header"><span class="text-color">Logo</span></th>
+              <th class="th_header">
+                <span class="text-color">Nombre del producto</span>
+              </th>
+              <th class="th_header">
+                <span class="text-color">Descripcion</span>
+              </th>
+              <th class="th_header">
+                <span class="text-color">Fecha de liberacion</span>
+              </th>
+              <th class="th_header">
+                <span class="text-color">Fecha de reestructuracion</span>
+              </th>
+              <th class="th_header"><span class="text-color"></span></th>
+            </tr>
+          </thead>
+
+          @for (product of products; track product.id) {
+          <tr>
+            <td>
+              <c-avatar class="avatar" [avatar]="product.logo" />
+            </td>
+            <td class="text-color">{{ product.name }}</td>
+            <td class="text-color">{{ product.description }}</td>
+            <td class="text-color">{{ product.date_release }}</td>
+            <td class="text-color">{{ product.date_revision }}</td>
+            <td class="text-color">
+              <div class="padre">
+                <div class="button vertical">•••</div>
+                <div class="hijo">
+                  <ul>
+                    <li (click)="edit(product.id)">Editar</li>
+                    <li (click)="delete(product.id)">Eliminar</li>
+                  </ul>
+                </div>
+              </div>
+            </td>
+          </tr>
+          }
+        </table>
+      </div>
+
+      <div class="toolBarTable">
+        <div class="footerTable">
+          <h4 class="text-color">{{ products.length }} Resultado</h4>
+        </div>
+        <div>
+          <select
+            class="input input-select"
+            [(ngModel)]="viewData"
+            (change)="selectView()"
+          >
+            <option>5</option>
+            <option>10</option>
+            <option>20</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<c-modal (isDelete)="isDelete($event)"></c-modal>
