@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { CModalComponent } from '../../components/c-modal/c-modal.component';
 import { Estados } from '../../../services/estados';
 import { delay } from 'rxjs';
+import { Utils } from '../../../utils/utils';
 
 @Component({
   selector: 'pg-main',
@@ -52,16 +53,7 @@ export class PgMainComponent {
   search() {
     setTimeout(() => {
       console.log('search' + this.dataFilter);
-      this.products = this.cpyProducts.filter(
-        (product) =>
-          product.name.toLowerCase().includes(this.dataFilter.toLowerCase()) ||
-          product.description
-            .toLowerCase()
-            .includes(this.dataFilter.toLowerCase()) ||
-          product.id.toString().includes(this.dataFilter) ||
-          product.date_revision.toString().includes(this.dataFilter) ||
-          product.date_release.toString().includes(this.dataFilter)
-      );
+      this.products = Utils.filterProducts(this.products, this.dataFilter);
     }, 500);
   }
 

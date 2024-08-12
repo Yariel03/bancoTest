@@ -22,9 +22,7 @@ export class PgEditProductComponent {
   @Input() id: any;
 
   ngOnInit() {
-    console.log('this.id: ', this.id);
     this.swProducts.getProduct(this.id).subscribe((res) => {
-      console.log('res: ', res);
       this.frmProduct.patchValue(res);
     });
   }
@@ -42,12 +40,6 @@ export class PgEditProductComponent {
   );
 
   constructor() {
-    console.log(
-      'date_release: ',
-      this.fechaActual,
-      'date_revision: ',
-      this.fechaFuture
-    );
     this.frmProduct = this.fb.group({
       id: [
         '',
