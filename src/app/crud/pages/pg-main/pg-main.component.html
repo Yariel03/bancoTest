@@ -41,8 +41,16 @@
               <th class="th_header"><span class="text-color"></span></th>
             </tr>
           </thead>
+          @if(!isloading){
+          <tr>
+            <td colspan="6">
+              <div class="loading">
+                <div class="">cargando</div>
+              </div>
+            </td>
+          </tr>
 
-          @for (product of products; track product.id) {
+          } @for (product of products; track product.id) {
           <tr>
             <td>
               <c-avatar class="avatar" [avatar]="product.logo" />
@@ -69,7 +77,7 @@
 
       <div class="toolBarTable">
         <div class="footerTable">
-          <h4 class="text-color">{{ products.length }} Resultado</h4>
+          <h4 class="text-color">{{ cpyProducts.length }} Resultado</h4>
         </div>
         <div>
           <select

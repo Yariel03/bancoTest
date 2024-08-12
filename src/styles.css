@@ -66,3 +66,18 @@
 .error {
   color: #f44336;
 }
+
+.skeleton {
+  animation: aniSkeleton 1s ease-in-out infinite;
+}
+
+@keyframes aniSkeleton {
+  0% {
+    background-color: #a3a5a8d0;
+    color: #a3a5a800;
+  }
+  100% {
+    background-color: #a09d9d;
+    color: #a09d9d00;
+  }
+}
